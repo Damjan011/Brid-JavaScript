@@ -1,0 +1,11 @@
+{
+  "name": "brid",
+  "version": "1.0.0",
+  "description": "Assignment task",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
