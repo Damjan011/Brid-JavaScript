@@ -1,11 +1,34 @@
 const winArr = [];
 const initArr = ['P', 'O', 'S', 'A', 'O'];
 
-let resetInterval = navigator.maxTouchPoints === 2 ? 8000 : 8000;
+const letterParent = document.getElementById("letter-wrapper");
+
+let resetInterval = navigator.maxTouchPoints === 2 ? 5000 : 6000;
+
+let fontSize = navigator.maxTouchPoints === 2 ? window.innerWidth / 12 : window.innerWidth / 8;
+
+const paraHeight = fontSize * 1.1;
+
+const letterWidth = fontSize * 0.75;
+
+let paraWidth = letterWidth * 5;
+
+let calculateWidth = () => {
+  let arr = [];
+  let startPosition = paraWidth / 2;
+  initArr.forEach(() => {
+    arr.push(startPosition);
+    startPosition -= letterWidth;
+  })
+  return arr;
+}
+
+let widthArray = calculateWidth();
+
+letterParent.style.fontSize = fontSize + 'px';
 
 const winChecker = (e) => {
   winArr.push(e.target.textContent);
-  console.log(winArr);
   winArr.forEach((el, index) => {
     if (winArr[index] !== initArr[index]) {
       winArr.length = 0;
@@ -32,29 +55,6 @@ const generateRandomPos = (count, min, max, interval) => {
   }
   return arr;
 }
-
-let fontSize = navigator.maxTouchPoints === 2 ? window.innerWidth / 12 : window.innerWidth / 8;
-
-const paraHeight = fontSize * 1.1;
-const letterWidth = fontSize * 0.75;
-
-const letterParent = document.getElementById("letter-wrapper");
-
-let paraWidth = letterWidth * 5;
-
-let calculateWidth = () => {
-  let arr = [];
-  let begin = paraWidth / 2;
-  for (let i = 0; i < 5; i++) {
-    arr.push(begin);
-    begin -= letterWidth;
-  }
-  return arr;
-}
-
-let widthArray = calculateWidth();
-
-letterParent.style.fontSize = fontSize + 'px';
 
 const gameInit = () => {
   initArr.forEach(el => {
@@ -108,4 +108,4 @@ const setWin = () => {
   document.getElementById('letter-wrapper').style.display = 'none';
 }
 
-var timer = setInterval(reset, resetInterval);
+let timer = setInterval(reset, resetInterval);
